@@ -14,3 +14,4 @@ The data folder contains extra data that were used. Data were taken from the fol
 1) Vaccination data: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh
 2) Population data: https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-County/8xkx-amqh
 3) Geographical data: https://www.kaggle.com/datasets/washimahmed/usa-latlong-for-state-abbreviations
+4) Stock data: https://www.yahoofinanceapi.com
