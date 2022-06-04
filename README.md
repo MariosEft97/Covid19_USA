@@ -3,3 +3,7 @@
 ## Project: Covid 19 in the USA
 
 The current study utilizes data from the New York Times (https://github.com/nytimes/covid-19-data) to study the evolution of the Covid19 pandemic in the US
+
+The mda_covid.ipynb notebook contains all the analysis that was conducted.
+
+The mda_module_010.py contains all the necessary funtions for the notebook to work properly.
