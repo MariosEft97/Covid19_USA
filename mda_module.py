@@ -4,19 +4,21 @@ def counties_preprocessing(dataset):
     
     """ The function pre-processes the counties' data sets."""
     
+    dataset_new = dataset.copy(deep=True)
+    
     # Missing values
     # For the counties New York City, Kansas City and Joplin the FIPS values are manually added.
-    dataset.loc[dataset.county == "New York City", "fips"] = int(36061)
-    dataset.loc[dataset.county == "Kansas City", "fips"] = int(20)
-    dataset.loc[dataset.county == "Joplin", "fips"] = int(2937592)
+    dataset_new.loc[dataset_new.county == "New York City", "fips"] = int(36061)
+    dataset_new.loc[dataset_new.county == "Kansas City", "fips"] = int(20)
+    dataset_new.loc[dataset_new.county == "Joplin", "fips"] = int(2937592)
     # Rows with NAs are dropped.
-    dataset.dropna(axis=0, inplace=True)
+    dataset_new.dropna(axis=0, inplace=True)
     
     # Numerical variables are transformed to integers.
-    dataset = dataset.astype({"fips": int, "cases": int, "deaths": int})
+    dataset_new = dataset_new.astype({"fips": int, "cases": int, "deaths": int})
     
     # Date variable is split into Year, Month, Day variables
-    dataset[["year", "month", "day"]] = dataset["date"].str.split("-", expand = True)
+    dataset_new[["year", "month", "day"]] = dataset_new["date"].str.split("-", expand = True)
     
     # From the following source, the abbreviation code for the states are added.
     df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv')
@@ -27,14 +29,14 @@ def counties_preprocessing(dataset):
     for (state, code) in zip(states, codes):
         codes_dict.update({state:code})
     
-    dataset['code'] = dataset['state'].map(codes_dict)
+    dataset_new['code'] = dataset_new['state'].map(codes_dict)
     
     # Column order is changed and dataset is sorted.
     col_order = ["date", "year", "month", "day", "state", "code", "county", "cases", "deaths"]
-    dataset = dataset[col_order]
-    dataset.sort_values(["date", "state"], inplace=True, ignore_index=True)
+    dataset_new = dataset_new[col_order]
+    dataset_new.sort_values(["date", "state"], inplace=True, ignore_index=True)
         
-    return dataset
+    return dataset_new
 
 def per_state(dataset):
     import pandas as pd
@@ -160,10 +162,11 @@ def extra_data_retriever(dataset, df_to_merge):
     return new_dataset_merged
 
 
-def timeseries_process(df, level):
+def timeseries_process(inputdf, level):
     import pandas as pd
     import numpy as np
     
+    df = inputdf.copy(deep=True)
     df['date']=pd.to_datetime(df['date'])
     
     # level: "us", "state", "county"
@@ -333,8 +336,10 @@ def cluster_process(df):
     df22_processed['population'] = df22_processed['code'].map(pop22)
     
     df20_processed.drop(["code"], axis=1, inplace=True)
+    df20_processed.drop(["Hawaii"], axis=0, inplace=True)
     df21_processed.drop(["code"], axis=1, inplace=True)
     df22_processed.drop(["code"], axis=1, inplace=True)
+    
     
     def risk_categorizer20(ratio):
         if ratio<0.03:
@@ -437,7 +442,7 @@ def cluster_algorithm(df, algorithm):
     return pcadf, Z, silhouette, ari
 
 
-def lmem_process(df):
+def anova_process(df):
     import pandas as pd
     import os
     
