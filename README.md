@@ -6,7 +6,7 @@ The current study utilizes data from the New York Times to study the evolution o
 
 The mda_covid.ipynb notebook contains all the analysis that was conducted.
 
-The mda_module_010.py contains all the necessary funtions for the notebook to work properly.
+The mda_module.py contains all the necessary funtions for the notebook to work properly.
 
 The covid-19-data folder contains the data sets taken from New York Times GitHub repo (https://github.com/nytimes/covid-19-data).
 
