@@ -1,6 +1,6 @@
 ## Project: Covid19 evolution in the USA
 
-The current study utilizes data from the New York Times to study the evolution of the Covid19 pandemic in the US
+The current study utilizes data from the New York Times to study the evolution of the Covid19 pandemic in the US.
 
 The mda_notebook.ipynb notebook contains all the analysis that was conducted.
 
