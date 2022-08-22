@@ -1,6 +1,4 @@
-# Modern Data Analytics [G0Z39a]
-
-## Project: Covid 19 in the USA
+## Project: Covid19 evolution in the USA
 
 The current study utilizes data from the New York Times to study the evolution of the Covid19 pandemic in the US
 
